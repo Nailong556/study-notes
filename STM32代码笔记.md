@@ -223,11 +223,3 @@ flowchart LR
 
 ---
 
-## 四、读代码时的一些发现（供参考）
-
-- **hello**：工程是空的，可以补一个串口打印 "hello world" 让它名副其实。
-- **interrupt**：配了 EXTI 但没写 `HAL_GPIO_EXTI_Callback`，中断目前没有实际效果，需要补回调。
-- **key**：KEY1 用的是 `GPIO_NOPULL`，如果外部电路没有上下拉电阻，电平可能悬空；KEY2 用 `GPIO_PULLUP` 更稳妥。
-- **iic**：`aht20.c` 里同时有阻塞版 `AHT20_Read`（内部用 IT 收发但没等完成标志，可能不可靠）和状态机版（主循环在用）。建议只保留状态机版。
-- **serial**：接收固定 2 字节，如果将来命令变长需要改成不定长接收（可参考 ble 工程的 `ReceiveToIdle` 写法）。
-- **oled / oled1**：两个工程基本重复，oled1 只有初始化；`Core/Src/Backup` 和 `Core/Inc/Backup` 里存的是旧版本 `.bak` 文件，确认用不到可以清理。
