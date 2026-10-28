@@ -207,18 +207,7 @@ flowchart TD
 
 ---
 
-## 三、公共模式总结
 
-1. **工程骨架**：全部由 CubeMX 生成，用户代码写在 `/* USER CODE BEGIN */ ... /* USER CODE END */` 之间，重开 CubeMX 不会丢。
-2. **时钟配置**：简单工程用 HSI 内部时钟；oled/oled1 用 HSE + PLL×9 跑到 72MHz（`FLASH_LATENCY_2`）。
-3. **手写文件分布**：大部分逻辑集中在 `main.c`；真正独立封装出来的驱动只有 `iic` 的 `aht20.c/h` 和 `oled` 的 OLED 库。
-4. **通信方式进阶**：
-
-```mermaid
-flowchart LR
-    A["阻塞方式<br/>HAL_UART_Transmit"] --> B["中断方式<br/>_IT"]
-    B --> C["DMA 定长<br/>Receive_DMA"]
-    C --> D["DMA 不定长<br/>ReceiveToIdle_DMA"]
 ```
 
 ---
